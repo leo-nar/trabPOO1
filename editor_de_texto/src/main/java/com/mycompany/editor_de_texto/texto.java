@@ -4,32 +4,32 @@
  * and open the template in the editor.
  */
 package com.mycompany.editor_de_texto;
-import java.util.ArrayList;
-import java.lang.String;
+import java.util.LinkedList;
 /**
  *
  * @author Leonardo Rodrigues
  */
 public class texto {
     
-    ArrayList  inserto;    
+    LinkedList<Character>  inserto;    
 
-     private void main() {
-        this.inserto = new ArrayList() ;
+     private void texto() {
+        this.inserto = new LinkedList() ;
         //nao precisa de indicador de tamanho pois o ArrayList ja tem
     }
     
     /**
      *
      * @param entrada->entrada do texto
+     * @param stk
      */
-    public void insert_end(String entrada)
+    public void insert_end(String entrada, stack_undu stk)
      {
         int c;
         char ch;
         
         
-        // push entrada
+        stk.push(entrada);
         c = entrada.length();
      
         for(int i=0;i<c;i++)
@@ -46,11 +46,12 @@ public class texto {
      *
      * @param entrada->entrada do texto
      * @param index-> ponteiro
+     * @param stk
      */
-    public void insert_middle(String entrada ,int index)
+    public void insert_middle(String entrada ,int index,stack_undu stk)
      {
      
-         //push entrada
+        stk.push(entrada);
         int c;
         char ch;
         c = entrada.length();
@@ -72,11 +73,15 @@ public class texto {
      *
      */
     public void print() {
+        char ch;
         int c=this.inserto.size();
         
         
         for (int i=0;i<c;i++)
-            System.out.println(this.inserto.get(i));
+        {
+            ch=this.inserto.get(i);
+            System.out.println(ch);
+        }
      }
      
     
