@@ -1,3 +1,4 @@
-com\mycompany\editor_de_texto\stack.class
-com\mycompany\editor_de_texto\texto.class
-com\mycompany\editor_de_texto\main.class
+textos\texto.class
+textos\pilha.class
+main\Main.class
+textos\cursor.class
