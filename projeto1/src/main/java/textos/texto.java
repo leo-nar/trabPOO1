@@ -2,9 +2,13 @@ package textos;
 
 import java.util.LinkedList;
 
-public class texto {
+/**
+ *
+ * @author Leonardo Rodrigues
+ */
+public class texto implements Cloneable {
     
-   private final LinkedList<Character> text;
+   private  LinkedList<Character> text;
    private int tamanho;
 
     /**
@@ -15,6 +19,18 @@ public class texto {
        this.tamanho = this.text.size();
     }
 
+    /**
+     *clona o objeto do tipo texto
+     * @return clone
+     */
+    @Override
+    public Object clone()
+    {
+        texto clone = new texto();
+        clone.text = (LinkedList)this.text.clone();
+        clone.tamanho=this.tamanho;
+        return clone;
+    }
     /**
      * Retorna o numero de caracteres no texto
      * @return quantos caracteres existem no texto
