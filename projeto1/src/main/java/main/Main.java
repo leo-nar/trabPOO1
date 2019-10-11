@@ -8,7 +8,7 @@ import pilhas.Refazer;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CloneNotSupportedException {
         int escolha =1;
         Scanner s = new Scanner(System.in);
         texto text = new texto();
@@ -35,26 +35,33 @@ public class Main {
                      case 1:
                          System.out.println("Digite o texto a ser inserido");
                          String buffer = s.nextLine();
-                         desfazer.push(text);//coloca o texto nao alterado na pilha de desfazer
+                         desfazer.push(text.clone());//coloca o texto nao alterado na pilha de desfazer
                          index.setPosicao(text.insert(buffer, index.getPosicao()));//insere buffer em texto e retorna a posicao do cursor apos a insercao
                          text.print();
                          System.out.println("Posicao do cursor: "+ index.getPosicao());
                          break;
                      case 2:
                          System.out.println("Digite quantos caracteres serao removidos");
-                         desfazer.push(text);//coloca o texto nao alterado na pilha de desfazer
-                         index.setPosicao(text.remove(s.nextInt(), index.getPosicao()));//remove um numero de caracteres e retorna a posicao do cursor
-                         text.print();
-                         System.out.println("Posicao do cursor: "+ index.getPosicao());
-                         s.nextLine();
+                         desfazer.push(text.clone());//coloca o texto nao alterado na pilha de desfazer
+                         if (s.hasNextInt()){//testa se a entrada eh um int
+                            index.setPosicao(text.remove(s.nextInt(), index.getPosicao()));//remove um numero de caracteres e retorna a posicao do cursor
+                            text.print();
+                            System.out.println("Posicao do cursor: "+ index.getPosicao());
+                         }
+                         else{
+                             System.out.println("Entrada Invalida");
+                         }
+                        s.nextLine();
                          break;
                      case 3:
-                         text = desfazer.undo(refazer,text);//desaz uma alteracaao no texto
+                         text = desfazer.undo(refazer,text.clone());//desaz uma alteracaao no texto/TODO Ver se refazer esta certo
+                         index.setPosicao(text.getTamanho());// apos desfazer posiciona o cursor no final do texto
                          text.print();
                          System.out.println("Posicao do cursor: "+ index.getPosicao());
                          break;
                      case 4:
-                         refazer.redo(desfazer,text);//refaz uma alteracao no texto
+                         text = refazer.redo(desfazer,text.clone());//refaz uma alteracao no texto//TODO funcionar
+                         index.setPosicao(text.getTamanho());//apos refafzer posiciona o cursor no final do texto
                          text.print();
                          System.out.println("Posicao do cursor: "+ index.getPosicao());
                          break;
@@ -65,6 +72,7 @@ public class Main {
                          break;
                      case 6:
                          text.print();
+                         System.out.println("Posicao do cursor: "+ index.getPosicao());
                          break;
                      case 7:
                          break;

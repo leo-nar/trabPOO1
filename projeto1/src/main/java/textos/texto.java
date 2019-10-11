@@ -2,9 +2,9 @@ package textos;
 
 import java.util.LinkedList;
 
-public class texto {
+public class texto implements Cloneable {
     
-   private final LinkedList<Character> text;
+   private LinkedList<Character> text;
    private int tamanho;
 
     /**
@@ -72,5 +72,17 @@ public class texto {
       }
         System.out.println();
    }
-
+/**
+     *clona o objeto do tipo texto
+     * @return clone
+     */
+    @Override
+    public texto clone() throws CloneNotSupportedException 
+    {
+        texto t = (texto)super.clone();
+        t.text= (LinkedList<Character>)this.text.clone();
+        return t;
+    }
+    
+    
 }
