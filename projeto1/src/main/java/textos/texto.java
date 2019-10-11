@@ -3,12 +3,13 @@ package textos;
 import java.util.LinkedList;
 
 /**
- *
- * @author Leonardo Rodrigues
+ *Contem o corpo do texto que sera alterado e imprimido e seu tamanho. Contem metodos para imprimir,inserir e remover, alem de uma funcao clone que
+ * cria um Deep Clone para uso com funcoes de refzer e desfazer
+ * @author Julio, Leonardo
  */
 public class texto implements Cloneable {
     
-   private  LinkedList<Character> text;
+   private LinkedList<Character> text;
    private int tamanho;
 
     /**
@@ -19,18 +20,6 @@ public class texto implements Cloneable {
        this.tamanho = this.text.size();
     }
 
-    /**
-     *clona o objeto do tipo texto
-     * @return clone
-     */
-    @Override
-    public Object clone()
-    {
-        texto clone = new texto();
-        clone.text = (LinkedList)this.text.clone();
-        clone.tamanho=this.tamanho;
-        return clone;
-    }
     /**
      * Retorna o numero de caracteres no texto
      * @return quantos caracteres existem no texto
@@ -88,5 +77,17 @@ public class texto implements Cloneable {
       }
         System.out.println();
    }
-
+/**
+     *clona o objeto do tipo texto
+     * @return clone
+     */
+    @Override
+    public texto clone() throws CloneNotSupportedException 
+    {
+        texto t = (texto)super.clone();
+        t.text= (LinkedList<Character>)this.text.clone();
+        return t;
+    }
+    
+    
 }
