@@ -3,6 +3,10 @@ package pilhas;
 import java.util.Stack;
 import textos.texto;
 
+/**
+ *Implementacao de uma stack, para permitir as classes desfazer e refazer
+ * @author Julio, Leonardo
+ */
 public class pilha {
     protected final Stack<texto> p;
     

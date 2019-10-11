@@ -7,7 +7,10 @@ package pilhas;
 
 import textos.texto;
 
-
+/**
+ *Uma stack que permite desfafzer uma alteracao no texto
+ * @author Julio, Leonardo
+ */
 public class Refazer extends pilha {
     
     /**

@@ -6,6 +6,10 @@ import java.util.Scanner;
 import pilhas.Desfazer;
 import pilhas.Refazer;
 
+/**
+ * Programa para edicao de textos em linha de comando, contem funcoes de adicionar e remover caracteres, desfazer e refazer alteracoes e imprimir o texto
+ * @author Julio, Leonardo
+ */
 public class Main {
 
     public static void main(String[] args) throws CloneNotSupportedException {

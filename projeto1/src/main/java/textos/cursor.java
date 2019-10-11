@@ -4,8 +4,8 @@ package textos;
 import java.util.Scanner;
 
 /**
- *
- * @author julio
+ *Contem um int posicao e metodos para altera-la e acessa-la. Com um metodo que testa se a posicao digitada eh valida
+ * @author Julio, Leonardo
  */
 public class cursor {
     private int posicao;

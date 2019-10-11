@@ -4,8 +4,8 @@ package pilhas;
 import textos.texto;
 
 /**
- *
- * @author julio
+ *Uma stack que permite refafzer uma alteracao do texto
+ * @author Julio, Leonardo
  */
 public class Desfazer extends pilha {
     
