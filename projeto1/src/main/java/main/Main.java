@@ -10,6 +10,7 @@ public class Main {
         int escolha =1;
         Scanner s = new Scanner(System.in);
         texto text = new texto();
+        texto txt = new texto();
         //pilha desfazer = new pilha();
         //pilha refazer = new pilha();
         cursor index = new cursor();
@@ -23,7 +24,8 @@ public class Main {
                                      + " 3 - Desfazer\n"
                                      + " 4 - Refazer\n"
                                      + " 5 - Mover cursor\n"
-                                     + " 6 - Sair\n");
+                                     + " 6 - imprimir texto\n"
+                                     + " 7 - Sair\n");
             
             if (s.hasNextInt()){
                  escolha = s.nextInt();
@@ -45,8 +47,10 @@ public class Main {
                          break;
                      case 3:
                          //desfazer.undo();
+                         
                          break;
                      case 4:
+                         
                          //refazer.redo();
                          break;
                      case 5:
@@ -54,6 +58,10 @@ public class Main {
                          index.move(s,text);//move o cursor para uma posicao escolhida pelo usuario e checa se ela eh valida
                          break;
                      case 6:
+                         text.print();
+                         break;
+                     case 7:
+                         
                          break;
                      default:
                          System.out.println("Escoilha Invalida!");
