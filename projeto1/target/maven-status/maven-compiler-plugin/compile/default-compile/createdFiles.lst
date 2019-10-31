@@ -1,6 +1,10 @@
 pilhas\Desfazer.class
+editor\editor$1.class
 pilhas\pilha.class
+textos\cursor.class
+editor\editor.class
+main\fileprompt.class
 pilhas\Refazer.class
 textos\texto.class
+editor\editor$2.class
 main\Main.class
-textos\cursor.class
