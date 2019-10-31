@@ -1,0 +1,37 @@
+-------------------------------------------------------------------------------
+Test set: textos.textoTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 5, Errors: 0, Skipped: 0, Time elapsed: 0.022 sec <<< FAILURE!
+textos.textoTest.testClone()  Time elapsed: 0.021 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <null> but was: <textos.texto@45fe3ee3>
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:54)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:195)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:184)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:179)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:508)
+	at textos.textoTest.testClone(textoTest.java:52)
+
+textos.textoTest.testGetTamanho()  Time elapsed: 0 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:38)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:84)
+	at textos.textoTest.testGetTamanho(textoTest.java:68)
+
+textos.textoTest.testInsert()  Time elapsed: 0 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:38)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:84)
+	at textos.textoTest.testInsert(textoTest.java:84)
+
+textos.textoTest.testRemove()  Time elapsed: 0.001 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:38)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:84)
+	at textos.textoTest.testRemove(textoTest.java:100)
+
+textos.textoTest.testPrint()  Time elapsed: 0 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:38)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:84)
+	at textos.textoTest.testPrint(textoTest.java:112)
+
