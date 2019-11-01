@@ -75,13 +75,17 @@ public class trhd implements Runnable{
     }
 
     /**
-     *
-     * @return
+     *retorna o booleano closeflag
+     * @return close flag
      */
     public boolean isCloseflag() {
         return closeflag;
     }
 
+    /**
+     *retorna o booleano saveflag
+     * @return
+     */
     public boolean isSaveflag() {
         return saveflag;
     }
