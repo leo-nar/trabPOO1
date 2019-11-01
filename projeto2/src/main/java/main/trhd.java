@@ -4,12 +4,11 @@
  * and open the template in the editor.
  */
 package main;
-import editor.editor;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import editor.editor;
 /**
  *
  * @author julio, leonardo
@@ -70,18 +69,26 @@ public class trhd implements Runnable{
         this.saveflag = saveflag;
     }
     /**
-     *
+     *return colseflag
      * @return
      */
     public boolean isCloseflag() {
         return closeflag;
     }
 
+    /**
+     *return saveflag
+     * @return
+     */
     public boolean isSaveflag() {
         return saveflag;
     }
 
-   public void setWriter(BufferedWriter bw){
+    /**
+     *define o buffer
+     * @param bw
+     */
+    public void setWriter(BufferedWriter bw){
        this.bw = bw;
    }
     
