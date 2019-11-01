@@ -1,0 +1,12 @@
+  Leonardo Rodrigues de Souza	10716380
+  Julio Eiji Oliveira	        10716491
+  
+  Nesta segunda parte do projeto ele foi modificado para simular um  
+  servidor e foi adicionada a capacidade de multithread ao programa,
+  tambem foram adicionadas as funcionalidades de copiar colar e 
+  cortar que estão disponiveis por meio dos atalhos de teclas padrão
+ (ctrl+c,ctrl+v,ctrl+x,respectivamente). Além disso foi adicionado 
+  a interface grafica e leitura e salvamento
+  de arquivo.
+  
+  
