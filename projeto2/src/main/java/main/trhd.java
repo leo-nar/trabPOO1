@@ -22,23 +22,22 @@ public class trhd implements Runnable{
     @Override
     public void run() 
     {
-        //cria o promptfile  que pergunta pelo nome do arquivo
-        fileprompt fp = new fileprompt();
+
         
-        while(fp.getFlag()){}
+        editor ed=new editor(this.buffer);
         
-        //editor ed=new editor(fp.getNomarq());
         
-        //chama o editor com o nome do arquivo
-        
-        //fica em loop ate o editor fechar
+        while(!ed.isCloseflag())
+        {
+            if(ed.isSaveflag())
+            {
+                ed.setSaveflag(false);
+                this.buffer=ed.getBuffer();
+            }
+        }
         
     }
     
-    public void arquivo(String nomarq)
-    {
-        //faz todo tratamento de arquivo necessario
-    }
-    
+
     
 }
