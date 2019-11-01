@@ -9,6 +9,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.event.UndoableEditEvent;
 import javax.swing.text.Document;
@@ -29,9 +33,24 @@ public class editor {
     private final JPanel buttonpanel;
     private final UndoManager undo;
     private final Document doc;
+    private volatile boolean closeflag;
+    private volatile boolean saveflag;
+    private BufferedReader br;
     
-    public editor() {
+    public editor(BufferedReader br) {//rececbe o arquivo em buffered reader
+            
+        this.br=br;
         body = new JTextArea(40,10);
+        try {
+            body.read(this.br, null);
+        } catch (IOException ex) {
+            Logger.getLogger(editor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        body.requestFocus();
+        
+        closeflag =false;
+        saveflag = false;
+        
         undo = new UndoManager();
         doc = body.getDocument();
         
@@ -58,12 +77,15 @@ public class editor {
         
         //funcao do botao de desconectar
         close.addActionListener((ActionEvent e)->{
-            System.exit(0);//TODO desconectar do servidor
+            this.closeflag = true;
+            //System.exit(0);//TODO desconectar do servidor
         });
+        
         //funcao de salvar
         save.addActionListener((ActionEvent e)->{
-            System.out.println("Salvei bonitao;)");
-            //TODO
+            this.saveflag = true;
+            
+            //TODO  escrevve no buffer para mandar
         });
         
         // Listen for undo and redo events
@@ -103,6 +125,26 @@ public class editor {
         body.getInputMap().put(KeyStroke.getKeyStroke("control Y"), "Redo");
     
     }
+
+    public boolean isCloseflag() {
+        return closeflag;
+    }
+
+    public void setCloseflag(boolean closeflag) {
+        this.closeflag = closeflag;
+    }
+
+    public boolean isSaveflag() {
+        return saveflag;
+    }
+
+    public void setSaveflag(boolean saveflag) {
+        this.saveflag = saveflag;
+    }
     
-   
+   public BufferedReader getBuffer(){
+       return this.br;
+   }
+    
+    
 }
