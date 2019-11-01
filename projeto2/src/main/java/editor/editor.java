@@ -1,9 +1,11 @@
+package editor;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package editor;
+
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -129,22 +131,42 @@ public class editor {
     
     }
 
+    /**
+     * retorna closeflag
+     * @return
+     */
     public boolean isCloseflag() {
         return closeflag;
     }
 
+    /**
+     * define closeflag
+     * @param closeflag
+     */
     public void setCloseflag(boolean closeflag) {
         this.closeflag = closeflag;
     }
 
+    /**
+     * retorna saveflag
+     * @return
+     */
     public boolean isSaveflag() {
         return saveflag;
     }
 
+    /**
+     * define saveflag
+     * @param saveflag
+     */
     public void setSaveflag(boolean saveflag) {
         this.saveflag = saveflag;
     }
     
+    /**
+     * escreve da text area para o arquivo por meio do buffer
+     * @param bw
+     */
     public void writefile(BufferedWriter bw){
         if(!(body==null)){
             try {
