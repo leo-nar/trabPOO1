@@ -70,8 +70,8 @@ public class editor {
         janela.pack();
         janela.setLocationRelativeTo(null);
         janela.setLayout(new BorderLayout());
-        janela.add(buttonpanel,BorderLayout.PAGE_START);
-        janela.add(body,BorderLayout.PAGE_END);
+        janela.add(buttonpanel,BorderLayout.PAGE_END);
+        janela.add(body,BorderLayout.PAGE_START);
         janela.setVisible(true);
         
         

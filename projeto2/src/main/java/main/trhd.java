@@ -22,22 +22,17 @@ public class trhd implements Runnable{
     @Override
     public void run() 
     {
-
+        editor e = new editor(this.buffer);
         
-        editor ed=new editor(this.buffer);
+        //editor ed=new editor(fp.getNomarq());
         
+        //chama o editor com o nome do arquivo
         
-        while(!ed.isCloseflag())
-        {
-            if(ed.isSaveflag())
-            {
-                ed.setSaveflag(false);
-                this.buffer=ed.getBuffer();
-            }
-        }
+        //fica em loop ate o editor fechar
         
     }
     
-
+    
+    
     
 }
