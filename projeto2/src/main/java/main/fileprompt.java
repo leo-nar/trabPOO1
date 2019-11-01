@@ -27,7 +27,8 @@ public class fileprompt {
     private final JPanel textpanel = new JPanel();
     private final JPanel buttonpanel = new JPanel();
     private String nomarq;
-    private Boolean flag;
+    private Boolean openflag;
+    
     public fileprompt(){
          //configuracao dos paineis
         textpanel.add(filename);
@@ -45,16 +46,20 @@ public class fileprompt {
         janela.add(textpanel);
         janela.add(buttonpanel);
         this.nomarq=new String();
-        this.flag=false;
+        this.openflag=false;
         
-        //funcao do botao de fechar
-        close.addActionListener((ActionEvent e)->{
+        
+        close.addActionListener((ActionEvent e)->{//funcao do botao de fechar
             System.exit(0);
         });
-        //funcao do botao de abrir
-        open.addActionListener((ActionEvent e)->{//TODO
-           this.nomarq=filename.getText();
-           this.flag=true;
+        
+        open.addActionListener((ActionEvent e)->{//funcao do botao de abrir. Se o textfield estiver em branco nao faz nada, caso contrario passa a string no textfield para nomarq e seta a flag de abertura como true
+            this.nomarq = filename.getText();
+            if (!"".equals(this.nomarq)) {
+                this.openflag = true;
+            } else {
+                this.filename.setText("Digite alguma coisa");
+            }
         });
         
     }
@@ -68,7 +73,11 @@ public class fileprompt {
     }
     
     public Boolean getFlag() {
-        return flag;
+        return openflag;
+    }
+
+    public void setOpenflag(Boolean openflag) {
+        this.openflag = openflag;
     }
 
     

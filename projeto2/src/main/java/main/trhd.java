@@ -5,13 +5,20 @@
  */
 package main;
 import editor.editor;
+import java.io.BufferedReader;
 
 /**
  *
  * @author julio
  */
 public class trhd implements Runnable{
-
+    
+    private BufferedReader buffer;
+    
+    public trhd(BufferedReader br){
+        this.buffer = br;
+    }
+    
     @Override
     public void run() 
     {
