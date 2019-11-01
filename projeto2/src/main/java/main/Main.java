@@ -2,8 +2,11 @@ package main;
 
 import editor.editor;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,22 +20,24 @@ import java.util.logging.Logger;
  */
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException{
         
         fileprompt ini = new fileprompt();
-        Thread t;
+        ArrayList <Thread> t= new ArrayList();
+        
+        
         while(true){
             
-            if (ini.getFlag()){//se o usuario apertou o botao abrir entramos aqui
-                FileReader f = null;
-                try {
-                    f = new FileReader(ini.getNomarq() + ".txt");
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+
+            if (ini.getFlag()){//se o usuario apertou o botao abrir tenta abrir o arquivo indicado, se nao existir cria um novo
+                File file = new File(ini.getNomarq()+".txt");
+                if (!file.isFile() &&!file.createNewFile()){
+                    throw new IOException("Erro ao criar o arquivo");
                 }
-                BufferedReader br = new BufferedReader(f);
-                t = new Thread(new trhd(br));
-                
+                try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                    t.add(new Thread(new trhd(br)));
+                    ini.setOpenflag(false);
+                }
             }
         }
 
