@@ -1,19 +1,18 @@
-package editor;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+package editor;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,10 +24,11 @@ import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
 
 /**
- *
+ *Janela de edição de texto. Permite o usuario escrever e remover caractersç selecionar, copiar e colar texto; desfazer
+ * e refazer modificacoes.
  * @author julio
  */
-public class editor {
+public class editor extends WindowAdapter {
     
     private final JButton save;
     private final JButton close;
@@ -41,7 +41,11 @@ public class editor {
     private volatile boolean saveflag;
     private BufferedReader br;
 
-    
+    /**
+     *Construtor do editor.Inicializa os parametros da janela, copoia o texto do buffer para a tela e define as funcões
+     * dos botoes implementados
+     * @param br
+     */
     public editor(BufferedReader br) {//rececbe o arquivo em buffered reader
             
         this.br=br;
@@ -70,8 +74,7 @@ public class editor {
         body.setLineWrap(true);
         body.setWrapStyleWord(true);
         
-        
-        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        janela.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         janela.setPreferredSize(new Dimension(1080,720));
         janela.pack();
         janela.setLocationRelativeTo(null);
@@ -80,25 +83,26 @@ public class editor {
         janela.add(body,BorderLayout.PAGE_START);
         janela.setVisible(true);
         
+        janela.addWindowListener(this);
+
         
         //funcao do botao de desconectar
         close.addActionListener((ActionEvent e)->{
-            this.closeflag = true;
-            //System.exit(0);//TODO desconectar do servidor
+            close();
         });
         
-        //funcao de salvar
+        //funcao de salvar. Seta a flag de salvar como verdadeiro
         save.addActionListener((ActionEvent e)->{
             this.saveflag = true;
 
         });
         
-        // Listen for undo and redo events
+        // escuta os eventos de desfazer e refazer
         doc.addUndoableEditListener((UndoableEditEvent evt) -> {
             undo.addEdit(evt.getEdit());
         });
         
-        // Create an undo action and add it to the text component
+        // cria uma funcao de undo e adiciona ao objeto de texto
         body.getActionMap().put("Undo",
                 new AbstractAction("Undo") {
             public void actionPerformed(ActionEvent evt) {
@@ -111,10 +115,10 @@ public class editor {
             }
         });
 
-        // Bind the undo action to ctl-Z
+        // faz com que crtl z seja a funcao undo
         body.getInputMap().put(KeyStroke.getKeyStroke("control Z"), "Undo");
 
-        // Create a redo action and add it to the text component
+        // cria uma acao de redo e adiciona ao objeto de texto
         body.getActionMap().put("Redo",
                 new AbstractAction("Redo") {
             public void actionPerformed(ActionEvent evt) {
@@ -126,54 +130,62 @@ public class editor {
                 }
             }
         });
-        // Bind the redo action to ctl-Y
+        // faz com que ctrl y seja a funcao redo
         body.getInputMap().put(KeyStroke.getKeyStroke("control Y"), "Redo");
     
     }
 
     /**
-     * retorna closeflag
-     * @return
+     *Getter da flag de close
+     * @return true se for fechar, se nao false
      */
     public boolean isCloseflag() {
         return closeflag;
     }
 
     /**
-     * define closeflag
-     * @param closeflag
-     */
-    public void setCloseflag(boolean closeflag) {
-        this.closeflag = closeflag;
-    }
-
-    /**
-     * retorna saveflag
-     * @return
+     *Getter da flag de save
+     * @return true se for para salvar, ses nao false
      */
     public boolean isSaveflag() {
         return saveflag;
     }
 
     /**
-     * define saveflag
-     * @param saveflag
+     *Setter da flag de save
+     * @param saveflag valor booleano para a flag
      */
     public void setSaveflag(boolean saveflag) {
         this.saveflag = saveflag;
     }
     
     /**
-     * escreve da text area para o arquivo por meio do buffer
-     * @param bw
+     *Escreve o conteudo da janela de texto em um arquivo decidido pelo buffered writer
+     * @param bw buffered writer contendo o arquivo a ser escrito
      */
     public void writefile(BufferedWriter bw){
         if(!(body==null)){
             try {
                 this.body.write(bw);
             } catch (IOException ex) {
-                Logger.getLogger(editor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    
+    /**
+     *Funcao que ativa ao fechar a janela. Sinaliza que a thread deve ser finalizada e fecha a janela
+     * @param e evento de janela
+     */
+    @Override
+    public void windowClosing(WindowEvent e){
+        close();
+    }
+    
+    /**
+     *Funcao que sinaliza que a thread deve ser finalizada e fecha a janela
+     */
+    public void close(){
+         this.closeflag=true;
+        this.janela.dispose();
     }
 }

@@ -3,16 +3,10 @@ package main;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-
-
 
 
 /**
@@ -22,15 +16,20 @@ import java.util.logging.Logger;
  */
 public class Main {
 
+    /**
+     *Metodo main do programa inicia um prompt de texto para a entrada do nome do arquivo a ser aberto
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException{
         
         fileprompt ini = new fileprompt();
-        ArrayList <trhd> t= new ArrayList();
+        ArrayList <RunningThread> t= new ArrayList();
         int threadcounter = 0;
-        BufferedReader br= null;
-        BufferedWriter bw=null;
+        BufferedReader br;
+        BufferedWriter bw;
         ArrayList <String> files = new ArrayList();
-        Thread th = null;
+        Thread th;
         
         while(true){
            
@@ -43,7 +42,7 @@ public class Main {
                 }
                 br = new BufferedReader(new FileReader(file));
                 
-                t.add(new trhd(br));//adiciona uma nova thread ao array list
+                t.add(new RunningThread(br));//adiciona uma nova thread ao array list
                 th = new Thread(t.get(threadcounter));//inicia a thread adicionada
                 th.start();
                 
@@ -51,21 +50,18 @@ public class Main {
                  ini.setOpenflag(false);
             }
             
-            for (int i = 0; i < t.size(); i++) {
+            for (int i = 0; i < t.size(); i++) {//testa se alguma janela pediu para salvar o arquivo. Se sim, salva o arquivo
                 if (t.get(i).isSaveflag()) {
                     bw = new BufferedWriter(new FileWriter(files.get(i)));
                     t.get(i).setWriter(bw);
                     t.get(i).setSaveflag(false);
                 }
+                else if (t.get(i).isCloseflag()){// testa se alguma janela pediu para desconectar. Se sim remove os objetos relevantes
+                    t.remove(i);                        //dos arraylists
+                    files.remove(i);
+                    threadcounter--;
+                }
             }
-            
-            
-        }
-        
-        /*  if (! (br == null)){
-        br.close();
-        }*/
-        
-    }
-    
+        }       
+    }   
 }

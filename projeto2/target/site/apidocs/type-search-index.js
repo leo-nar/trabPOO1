@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"textos","l":"cursor"},{"p":"pilhas","l":"Desfazer"},{"p":"main","l":"Main"},{"p":"pilhas","l":"pilha"},{"p":"pilhas","l":"Refazer"},{"p":"textos","l":"texto"}]
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"editor","l":"editor"},{"p":"main","l":"fileprompt"},{"p":"main","l":"Main"},{"p":"main","l":"RunningThread"}]
