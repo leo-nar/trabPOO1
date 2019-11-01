@@ -1,12 +1,15 @@
   Leonardo Rodrigues de Souza	10716380
   Julio Eiji Oliveira	        10716491
   
-  Nesta segunda parte do projeto ele foi modificado para simular um  
+  Nesta segunda parte do projeto ele foi modificado para rodar um  
   servidor e foi adicionada a capacidade de multithread ao programa,
-  tambem foram adicionadas as funcionalidades de copiar colar e 
+  permitindo que varios arquivos, ou o mesmo arquivo, possam sesr editados
+  ao mesmo tempo.
+  Também foram adicionadas as funcionalidades de copiar, colar e 
   cortar que estão disponiveis por meio dos atalhos de teclas padrão
- (ctrl+c,ctrl+v,ctrl+x,respectivamente). Além disso foi adicionado 
-  a interface grafica e leitura e salvamento
-  de arquivo.
+ (ctrl+c,ctrl+v,ctrl+x,respectivamente). Também estão presentes as 
+  funcionalidades de desfazer e refazer, disponiveis com os atalhos 
+  ctrl+z e crtl+y, respectivamente. Além disso foram adicionados 
+  a interface grafica e leitura e salvamento de arquivo.
   
   
