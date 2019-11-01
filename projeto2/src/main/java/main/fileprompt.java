@@ -27,7 +27,7 @@ public class fileprompt {
     private final JPanel textpanel = new JPanel();
     private final JPanel buttonpanel = new JPanel();
     private String nomarq;
-    private Boolean openflag;
+    private volatile Boolean openflag;
     
     public fileprompt(){
          //configuracao dos paineis
