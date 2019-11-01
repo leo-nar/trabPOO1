@@ -15,8 +15,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- *
- * @author julio
+ *Classe que contem a janela de abertura do programa. Ela pede que o usuario entre com o titulo do arquivo a ser aberto, no caso do arquivo nao existir
+ * ela cria um novo arquivo com o nome
+ * @author julio, Leonardo
  */
 public class fileprompt {
     private final JFrame janela = new JFrame("Abrir Arquivo");
@@ -29,6 +30,9 @@ public class fileprompt {
     private String nomarq;
     private volatile Boolean openflag;
     
+    /**
+     *Construtor do fileprompt.Inicia todas as configuracoes da janela, da flag e das funcoes dos botoes
+     */
     public fileprompt(){
          //configuracao dos paineis
         textpanel.add(filename);
@@ -49,7 +53,7 @@ public class fileprompt {
         this.openflag=false;
         
         
-        close.addActionListener((ActionEvent e)->{//funcao do botao de fechar
+        close.addActionListener((ActionEvent e)->{//funcao do botao de fechar. Fecha o programa
             System.exit(0);
         });
         
@@ -64,18 +68,26 @@ public class fileprompt {
         
     }
 
+    /**
+     *Getter para o nome do arquivo digitado
+     * @return texto digitado no JTextField da janela
+     */
     public String getNomarq() {
         return nomarq;
     }
-
-    public void setNomarq(String nomarq) {
-        this.nomarq = nomarq;
-    }
     
+    /**
+     *Getter para a flag de abrir o arquivo
+     * @return a flag de abertura de arquivo
+     */
     public Boolean getFlag() {
         return openflag;
     }
 
+    /**
+     *Setter para a flag de abertura de arquivo
+     * @param openflag flag que diz se pode ser feita a abertura de um arquivo
+     */
     public void setOpenflag(Boolean openflag) {
         this.openflag = openflag;
     }

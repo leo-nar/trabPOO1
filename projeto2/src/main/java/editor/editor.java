@@ -10,6 +10,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,17 +31,19 @@ public class editor {
     private final JButton save;
     private final JButton close;
     private final JFrame janela;
-    private final JTextArea body;
+    private  JTextArea body=null;
     private final JPanel buttonpanel;
     private final UndoManager undo;
     private final Document doc;
     private volatile boolean closeflag;
     private volatile boolean saveflag;
     private BufferedReader br;
+
     
     public editor(BufferedReader br) {//rececbe o arquivo em buffered reader
             
         this.br=br;
+  
         body = new JTextArea(40,10);
         try {
             body.read(this.br, null);
@@ -70,8 +74,8 @@ public class editor {
         janela.pack();
         janela.setLocationRelativeTo(null);
         janela.setLayout(new BorderLayout());
-        janela.add(buttonpanel,BorderLayout.PAGE_START);
-        janela.add(body,BorderLayout.PAGE_END);
+        janela.add(buttonpanel,BorderLayout.PAGE_END);
+        janela.add(body,BorderLayout.PAGE_START);
         janela.setVisible(true);
         
         
@@ -84,8 +88,7 @@ public class editor {
         //funcao de salvar
         save.addActionListener((ActionEvent e)->{
             this.saveflag = true;
-            
-            //TODO  escrevve no buffer para mandar
+
         });
         
         // Listen for undo and redo events
@@ -142,9 +145,13 @@ public class editor {
         this.saveflag = saveflag;
     }
     
-   public BufferedReader getBuffer(){
-       return this.br;
-   }
-    
-    
+    public void writefile(BufferedWriter bw){
+        if(!(body==null)){
+            try {
+                this.body.write(bw);
+            } catch (IOException ex) {
+                Logger.getLogger(editor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }

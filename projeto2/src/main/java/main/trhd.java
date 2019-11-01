@@ -6,50 +6,54 @@
 package main;
 import editor.editor;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author julio
+ * @author julio, leonardo
  */
 public class trhd implements Runnable{
     
-    private BufferedReader buffer;
+    private final BufferedReader buffer;
+    private BufferedWriter bw;
     private volatile boolean closeflag;
     private volatile boolean saveflag;
+
     
     public trhd(BufferedReader br){
         this.buffer = br;
         this.closeflag = false;
         this.saveflag = false;
+     
     }
     
     @Override
     public void run() 
     {
-
-        
         editor ed=new editor(this.buffer);
-        
         
         while(!ed.isCloseflag())
         {
             if(ed.isSaveflag())
-            {
+            { 
+                this.saveflag=true; 
+                
+                while(this.saveflag){
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException ex) {
+                    }
+                }
                 ed.setSaveflag(false);
-                this.buffer=ed.getBuffer();
+                ed.writefile(this.bw); 
             }
         }
         
     }
 
-    /**
-     * define o buffer
-     * @param buffer
-     */
-    public void setBuffer(BufferedReader buffer) {
-        this.buffer = buffer;
-    }
-
+  
     /**
      * define closeflag
      * @param closeflag
@@ -65,30 +69,21 @@ public class trhd implements Runnable{
     public void setSaveflag(boolean saveflag) {
         this.saveflag = saveflag;
     }
-
     /**
-     * retorna o buffer
-     * @return buffer
-     */
-    public BufferedReader getBuffer() {
-        return buffer;
-    }
-
-    /**
-     *retorna o booleano closeflag
-     * @return close flag
+     *
+     * @return
      */
     public boolean isCloseflag() {
         return closeflag;
     }
 
-    /**
-     *retorna o booleano saveflag
-     * @return
-     */
     public boolean isSaveflag() {
         return saveflag;
     }
+
+   public void setWriter(BufferedWriter bw){
+       this.bw = bw;
+   }
     
 
     
