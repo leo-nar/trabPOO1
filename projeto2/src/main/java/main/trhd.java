@@ -14,25 +14,78 @@ import java.io.BufferedReader;
 public class trhd implements Runnable{
     
     private BufferedReader buffer;
+    private volatile boolean closeflag;
+    private volatile boolean saveflag;
     
     public trhd(BufferedReader br){
         this.buffer = br;
+        this.closeflag = false;
+        this.saveflag = false;
     }
     
     @Override
     public void run() 
     {
-        editor e = new editor(this.buffer);
+
         
-        //editor ed=new editor(fp.getNomarq());
+        editor ed=new editor(this.buffer);
         
-        //chama o editor com o nome do arquivo
         
-        //fica em loop ate o editor fechar
+        while(!ed.isCloseflag())
+        {
+            if(ed.isSaveflag())
+            {
+                ed.setSaveflag(false);
+                this.buffer=ed.getBuffer();
+            }
+        }
         
     }
+
+    /**
+     * define o buffer
+     * @param buffer
+     */
+    public void setBuffer(BufferedReader buffer) {
+        this.buffer = buffer;
+    }
+
+    /**
+     * define closeflag
+     * @param closeflag
+     */
+    public void setCloseflag(boolean closeflag) {
+        this.closeflag = closeflag;
+    }
+
+    /**
+     *
+     * @param saveflag
+     */
+    public void setSaveflag(boolean saveflag) {
+        this.saveflag = saveflag;
+    }
+
+    /**
+     * retorna o buffer
+     * @return buffer
+     */
+    public BufferedReader getBuffer() {
+        return buffer;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean isCloseflag() {
+        return closeflag;
+    }
+
+    public boolean isSaveflag() {
+        return saveflag;
+    }
     
-    
-    
+
     
 }
